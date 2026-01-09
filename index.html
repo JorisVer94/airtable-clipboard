@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<body>
+<script>
+const params = new URLSearchParams(window.location.search);
+const text = decodeURIComponent(params.get("text"));
+
+if (text) {
+    navigator.clipboard.writeText(text).then(() => {
+        document.body.innerHTML = "✅ Copied to clipboard:<br><br>" + text;
+        setTimeout(() => window.close(), 900);
+    });
+} else {
+    document.body.innerHTML = "❌ No text received.";
+}
+</script>
+</body>
+</html>
