@@ -1,17 +1,27 @@
 <!DOCTYPE html>
 <html>
-<body>
+<head>
+<meta charset="utf-8">
+<title>Copy</title>
+</head>
+<body style="font-family:Arial;text-align:center;padding:40px">
+
+<h3>Text in Zwischenablage kopieren</h3>
+
+<textarea id="t" style="width:90%;height:140px"></textarea><br><br>
+
+<button onclick="copy()">📋 Kopieren & schließen</button>
+
 <script>
 const params = new URLSearchParams(window.location.search);
-const text = decodeURIComponent(params.get("text"));
+document.getElementById("t").value = decodeURIComponent(params.get("text") || "");
 
-if (text) {
+function copy() {
+    const text = document.getElementById("t").value;
     navigator.clipboard.writeText(text).then(() => {
-        document.body.innerHTML = "✅ Copied to clipboard:<br><br>" + text;
-        setTimeout(() => window.close(), 900);
+        document.body.innerHTML = "✅ Kopiert!";
+        setTimeout(() => window.close(), 600);
     });
-} else {
-    document.body.innerHTML = "❌ No text received.";
 }
 </script>
 </body>
